@@ -1,6 +1,6 @@
 
 <script setup>
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 
 const formSuccess = ref(false);
 const fieldValues = reactive({
@@ -70,6 +70,9 @@ const validate = () => {
 const handleSubmit = () => {
   validate();
   const isValid = Object.values(fieldErr).every((i) => i === "");
+  if (isValid) {
+    formSuccess.value = true;
+  }
 };
 
 const handleCountrySelect = (data) => {
@@ -84,46 +87,75 @@ const handleChange = (data, fieldName) => {
 </script>
 
 <template>
-  <h1>Sign Up</h1>
-  <div
-    class="mt-3 d-flex flex-column"
-    v-for="each in fields"
-    :key="each.fieldName"
-  >
-    <label>{{ each.placeholder }}</label>
-    <input
-      class="form-control"
-      :type="each.type"
-      :placeholder="each.placeholder"
-      :style="{ borderColor: '' }"
-      v-model="fieldValues[each.fieldName]"
-      @input="(e) => handleChange(e.target.value, each.fieldName)"
-    />
-    <span class="text-danger">{{ fieldErr[each.fieldName] }}</span>
-  </div>
-  <div class="mt-3 d-flex flex-column">
-    <label for="country">Country</label>
-    <select
-      class="form-control"
-      id="country"
-      name="country"
-      v-model="fieldValues['country']"
-      @change="(e) => handleCountrySelect(e.target.value)"
+  <div v-if="!formSuccess">
+    <h1>Sign Up</h1>
+    <div
+      class="mt-3 d-flex flex-column"
+      v-for="each in fields"
+      :key="each.fieldName"
     >
-      <option
-        v-for="each in countries"
-        :value="each.value"
-        :key="each.countryName"
+      <label>{{ each.placeholder }}</label>
+      <input
+        class="form-control"
+        :type="each.type"
+        :placeholder="each.placeholder"
+        :style="{ borderColor: fieldErr[each.fieldName] ? 'red' : '' }"
+        v-model="fieldValues[each.fieldName]"
+        @input="(e) => handleChange(e.target.value, each.fieldName)"
+      />
+      <span class="text-danger">{{ fieldErr[each.fieldName] }}</span>
+    </div>
+    <div class="mt-3 d-flex flex-column">
+      <label for="country">Country</label>
+      <select
+        class="form-control"
+        name="country"
+        :style="{ borderColor: fieldErr['country'] ? 'red' : '' }"
+        v-model="fieldValues['country']"
+        @change="(e) => handleCountrySelect(e.target.value)"
       >
-        {{ each.countryName }}
-      </option>
-    </select>
-    <span class="text-danger">{{ fieldErr["country"] }}</span>
+        <option
+          v-for="each in countries"
+          :value="each.value"
+          :key="each.countryName"
+        >
+          {{ each.countryName }}
+        </option>
+      </select>
+      <span class="text-danger">{{ fieldErr["country"] }}</span>
+    </div>
+    <button class="mt-5 btn btn-primary btn-lg" @click="handleSubmit">
+      Sign Up
+    </button>
   </div>
-  <button class="mt-5 btn btn-primary btn-lg" @click="handleSubmit">
-    Sign Up
-  </button>
+  <div v-if="formSuccess" class="image-container">
+    <img
+      src="https://images.ctfassets.net/dfcvkz6j859j/3yyuVQqgzMOMr2AGytPI4u/91be75a9b2d8debb8750270d0b3d52d4/Web-Analytics-Dashboard.png"
+      alt="..."
+    />
+  </div>
 </template>
 
 <style>
+/* Ensure the image takes up the full viewport */
+.image-container {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Center the image horizontally and vertically */
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Ensure the image resizes while maintaining aspect ratio */
+.image-container img {
+  max-width: 100%;
+  max-height: 100%;
+}
 </style>
