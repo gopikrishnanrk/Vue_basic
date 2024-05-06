@@ -1,22 +1,10 @@
 <script setup>
-import Signin from "./components/Signin.vue";
+import SignUp from "./components/SignUp/SignUp.vue";
 </script>
 
 
 
-<template><Signin /></template>
+<template><SignUp /></template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
 </style>
