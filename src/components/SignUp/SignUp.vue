@@ -4,7 +4,7 @@
 import { reactive, ref } from "vue";
 import ButtonVue from "../../common/Button.vue";
 import ErrorText from "../../common/ErrorText.vue";
-import { fields, countries } from "/src/utils/formFields.js";
+import { fields, countries, loginFields } from "/src/utils/formFields.js";
 import {
   isEmailValid,
   isPhoneNoValid,
@@ -32,7 +32,29 @@ const fieldErr = reactive({
   dob: "",
 });
 
+const resetFieldValues = () => {
+  fieldValues.email = "";
+  fieldValues.password = "";
+  fieldValues.confirmPassword = "";
+  fieldValues.phoneNo = "";
+  fieldValues.country = "";
+  fieldValues.dob = "";
+};
+
 const submitValidation = () => {
+  if (formSuccess.value) {
+    Object.entries(fieldValues).map(([key, value]) => {
+      debugger;
+      if (
+        !value &&
+        loginFields.map(({ fieldName }) => fieldName).includes(key)
+      ) {
+        fieldErr[key] = "Field value is required";
+      }
+    });
+    return;
+  }
+
   Object.entries(fieldValues).map(([key, value]) => {
     if (!value) {
       return (fieldErr[key] = "Field value is required");
@@ -79,10 +101,15 @@ const handleSubmit = () => {
   const isValid = Object.values(fieldErr).every((i) => i === "");
 
   if (isValid) {
+    if (formSuccess.value) {
+      alert("User added successfully");
+      return;
+    }
     loader.value = true;
     setTimeout(() => {
       formSuccess.value = true;
       loader.value = false;
+      resetFieldValues();
     }, 2000);
   }
 };
@@ -99,11 +126,11 @@ const handleChange = (data, fieldName) => {
 </script>
 
 <template>
-  <div class="form-container" v-if="!formSuccess">
-    <h1>Sign Up</h1>
+  <div :class="`form-container ${formSuccess ? 'create-user' : ''}`">
+    <h1>{{ formSuccess ? "Create User" : "Sign Up" }}</h1>
     <div
       class="mt-3 d-flex flex-column"
-      v-for="each in fields"
+      v-for="each in formSuccess ? loginFields : fields"
       :key="each.fieldName"
     >
       <label>{{ each.placeholder }}</label>
@@ -118,7 +145,7 @@ const handleChange = (data, fieldName) => {
       />
       <ErrorText :errorText="fieldErr[each.fieldName]" />
     </div>
-    <div class="mt-3 d-flex flex-column">
+    <div class="mt-3 d-flex flex-column" v-if="!formSuccess">
       <label for="country">Country</label>
       <select
         class="form-control"
@@ -144,23 +171,17 @@ const handleChange = (data, fieldName) => {
       :loader="loader"
     />
   </div>
-  <div v-if="formSuccess" class="image-container">
-    <img
-      src="https://images.ctfassets.net/dfcvkz6j859j/3yyuVQqgzMOMr2AGytPI4u/91be75a9b2d8debb8750270d0b3d52d4/Web-Analytics-Dashboard.png"
-      alt="..."
-    />
-  </div>
 </template>
 
-<style>
+<style >
 body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  background-image: url("../../assets/JPG _MEDIUM.jpg");
   background-size: cover;
   background-position: center;
   font-family: Arial, sans-serif;
+  background-image: url("../../assets/JPG _MEDIUM.jpg");
 }
 
 .form-container {
@@ -172,26 +193,12 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.create-user {
+  background-color: rgba(255, 255, 255, 0.8);
+  background-image: url("../../assets/Blue Modern Geometric LinkedIn Banner.png");
+}
+
 .input-err {
   border-color: red;
-}
-
-.image-container {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
-.image-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.image-container img {
-  max-width: 100%;
-  max-height: 100%;
 }
 </style>
