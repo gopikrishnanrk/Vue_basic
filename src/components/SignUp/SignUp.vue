@@ -11,26 +11,56 @@ import {
   isDateValid,
   comparePassword,
 } from "/src/utils/validation.js";
+import { checkUserValid, postUser } from "../../service/userService";
+import { setUserDetails } from "../../utils/localStorage";
+import { useRoute, useRouter } from "vue-router";
+import { loginFields } from "../../utils/formFields";
+
+const route = useRoute();
+const router = useRouter();
+const currentPath = route.path;
+
+const isLogin = currentPath === "/login";
+const fieldArr = isLogin ? loginFields : fields;
+const fieldObj = fieldArr?.reduce((acc, crr) => {
+  acc[crr.fieldName] = "";
+  return acc;
+}, {});
+const fieldInitialState = isLogin ? fieldObj : { ...fieldObj, country: "" };
+const errInitialState = isLogin ? fieldObj : { ...fieldObj, country: "" };
 
 const formSuccess = ref(false);
 const loader = ref(false);
-const fieldValues = reactive({
-  email: "",
-  password: "",
-  confirmPassword: "",
-  phoneNo: "",
-  country: "",
-  dob: "",
-});
+const fieldValues = reactive({ ...fieldInitialState });
+const fieldErr = reactive({ ...errInitialState });
 
-const fieldErr = reactive({
-  email: "",
-  password: "",
-  confirmPassword: "",
-  phoneNo: "",
-  country: "",
-  dob: "",
-});
+const postUserDetails = async (params) => {
+  try {
+    const { data } = await postUser(params);
+    setUserDetails(fieldValues);
+    router.push("/dashboard");
+    alert("Registered successfully");
+  } catch (error) {
+    alert(error);
+    console.error("Error:", error);
+  }
+};
+
+const authenticateUser = async (email, password) => {
+  try {
+    const { data } = await checkUserValid(email, password);
+    const userDetails = data?.[0];
+    if (userDetails) {
+      setUserDetails(userDetails);
+      router.push("/dashboard");
+      return;
+    }
+    alert("Invalid login or password");
+  } catch (error) {
+    alert(error);
+    console.error("Error:", error);
+  }
+};
 
 const submitValidation = () => {
   Object.entries(fieldValues).map(([key, value]) => {
@@ -79,8 +109,15 @@ const handleSubmit = () => {
   const isValid = Object.values(fieldErr).every((i) => i === "");
 
   if (isValid) {
+    if (isLogin) {
+      authenticateUser(fieldValues.email, fieldValues.password);
+      return;
+    }
     loader.value = true;
     setTimeout(() => {
+      // const formData = new FormData();
+      // formData.append("image", fieldValues.image);
+      postUserDetails(fieldValues);
       formSuccess.value = true;
       loader.value = false;
     }, 2000);
@@ -92,18 +129,23 @@ const handleCountrySelect = (data) => {
   fieldErr["country"] = "";
 };
 
-const handleChange = (data, fieldName) => {
-  fieldValues[fieldName] = data;
-  handleChangeValidation(fieldName, data);
+const handleChange = (target, fieldName) => {
+  const { value } = target;
+  if (fieldName === "image") {
+    const img = target.files?.[0];
+    fieldValues[fieldName] = img;
+  }
+  fieldValues[fieldName] = value;
+  handleChangeValidation(fieldName, value);
 };
 </script>
 
 <template>
-  <div class="form-container" v-if="!formSuccess">
-    <h1>Sign Up</h1>
+  <div class="form-container">
+    <h1>{{ isLogin ? "Login" : "Sign Up" }}</h1>
     <div
       class="mt-3 d-flex flex-column"
-      v-for="each in fields"
+      v-for="each in isLogin ? loginFields : fields"
       :key="each.fieldName"
     >
       <label>{{ each.placeholder }}</label>
@@ -114,11 +156,11 @@ const handleChange = (data, fieldName) => {
         :placeholder="each.placeholder"
         v-model="fieldValues[each.fieldName]"
         @blur="handleFocus"
-        @input="(e) => handleChange(e.target.value, each.fieldName)"
+        @input="(e) => handleChange(e.target, each.fieldName)"
       />
       <ErrorText :errorText="fieldErr[each.fieldName]" />
     </div>
-    <div class="mt-3 d-flex flex-column">
+    <div class="mt-3 d-flex flex-column" v-if="!isLogin">
       <label for="country">Country</label>
       <select
         class="form-control"
@@ -142,12 +184,6 @@ const handleChange = (data, fieldName) => {
       className="mt-5 btn btn-primary btn-lg w-100"
       @handleSubmit="handleSubmit"
       :loader="loader"
-    />
-  </div>
-  <div v-if="formSuccess" class="image-container">
-    <img
-      src="https://images.ctfassets.net/dfcvkz6j859j/3yyuVQqgzMOMr2AGytPI4u/91be75a9b2d8debb8750270d0b3d52d4/Web-Analytics-Dashboard.png"
-      alt="..."
     />
   </div>
 </template>
