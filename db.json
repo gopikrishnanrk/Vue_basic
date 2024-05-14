@@ -1,0 +1,116 @@
+{
+  "users": [
+    {
+      "id": "1cd2",
+      "email": "admin@spericorn.com",
+      "password": "123",
+      "confirmPassword": "123",
+      "phoneNo": "1234567891",
+      "country": "USA",
+      "dob": "1993-05-09"
+    },
+    {
+      "id": "1vb2",
+      "email": "adminqw@spericorn.com",
+      "password": "123",
+      "confirmPassword": "123",
+      "phoneNo": "1234567891",
+      "country": "India",
+      "dob": "2024-08-09"
+    },
+    {
+      "id": "1bq3",
+      "email": "admin123@spericorn.com",
+      "password": "123",
+      "confirmPassword": "123",
+      "phoneNo": "1234567891",
+      "country": "USA",
+      "dob": "1998-05-09"
+    },
+    {
+      "id": "5b3d",
+      "email": "admin@spericorn.com",
+      "password": "1234",
+      "confirmPassword": "1234",
+      "phoneNo": "1234567894",
+      "country": "CAN",
+      "dob": "2024-05-02"
+    },
+    {
+      "id": "05cf",
+      "email": "admin@spericorn.com",
+      "password": "890",
+      "confirmPassword": "890",
+      "phoneNo": "1234567894",
+      "country": "AUS",
+      "dob": "2024-05-03"
+    },
+    {
+      "id": "b037",
+      "email": "admin@spericorn.com",
+      "password": "456",
+      "confirmPassword": "456",
+      "phoneNo": "1234567892",
+      "country": "CAN",
+      "dob": "2024-05-09"
+    },
+    {
+      "id": "b4c2",
+      "email": "admin@spericorn.com",
+      "password": "345",
+      "confirmPassword": "345",
+      "phoneNo": "1234567888",
+      "country": "CAN",
+      "dob": "2024-05-10"
+    },
+    {
+      "id": "7fd4",
+      "email": "admin@spericorn.com",
+      "password": "345",
+      "confirmPassword": "345",
+      "phoneNo": "1234567888",
+      "country": "CAN",
+      "dob": "2024-05-10"
+    },
+    {
+      "id": "d3d2",
+      "email": "admin@spericorn.com",
+      "password": "fgh",
+      "confirmPassword": "fgh",
+      "phoneNo": "1234567892",
+      "dob": "2024-05-02",
+      "image": "C:\\fakepath\\12.jpg",
+      "country": "IN"
+    },
+    {
+      "id": "889b",
+      "email": "admin@spericorn.com",
+      "password": "fgt",
+      "confirmPassword": "fgt",
+      "phoneNo": "1234567896",
+      "dob": "2024-05-02",
+      "image": "C:\\fakepath\\12.jpg",
+      "country": "IN"
+    },
+    {
+      "id": "c8b6",
+      "email": "admin@spericorn.com",
+      "password": "2",
+      "confirmPassword": "2",
+      "phoneNo": "1234567892",
+      "dob": "2024-05-01",
+      "country": "USA"
+    },
+    {
+      "id": "250b",
+      "email": "admin@spericorn.com",
+      "password": "1",
+      "confirmPassword": "1",
+      "phoneNo": "1234567892",
+      "dob": "2024-05-03",
+      "image": "C:\\fakepath\\12.jpg",
+      "country": "UK",
+      "formData": {}
+    }
+  ]
+}

@@ -1,10 +1,11 @@
 <script setup>
-import SignUp from "./components/SignUp/SignUp.vue";
+import { useRoute } from "vue-router";
+import router from "./routes/router";
 </script>
 
-
-
-<template><SignUp /></template>
+<template>
+  <router-view />
+</template>
 
 <style scoped>
 </style>

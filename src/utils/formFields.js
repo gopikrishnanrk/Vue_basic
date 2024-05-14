@@ -12,6 +12,7 @@ export const fields = [
     type: 'number',
   },
   { fieldName: 'dob', placeholder: 'DOB', type: 'date' },
+  { fieldName: 'image', placeholder: 'Image', type: 'file' },
 ];
 
 export const countries = [
@@ -24,10 +25,5 @@ export const countries = [
 
 export const loginFields = [
   { fieldName: 'email', placeholder: 'Email', type: 'text' },
-  {
-    fieldName: 'phoneNo',
-    placeholder: 'Phone No.',
-    type: 'number',
-  },
-  { fieldName: 'dob', placeholder: 'DOB', type: 'date' },
+  { fieldName: 'password', placeholder: 'Password', type: 'password' },
 ];
