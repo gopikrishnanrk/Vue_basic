@@ -1,6 +1,6 @@
 import axios from 'axios';
 import gateway from '../config/gateway';
-import { googleClientID, googleClientSecret } from '../main';
+// import { googleClientID, googleClientSecret } from '../main';
 
 export const getAllUser = () => gateway.get('/users');
 
