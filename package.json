@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "json-server --watch db.json",
+    "server": "json-server --watch db.json",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
@@ -13,7 +13,8 @@
     "axios": "^1.6.8",
     "json-server": "^1.0.0-alpha.23",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.2"
+    "vue-router": "^4.3.2",
+    "vue3-google-login": "^2.0.26"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",

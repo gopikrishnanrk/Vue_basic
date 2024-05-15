@@ -26,9 +26,16 @@
       </div>
       <div className="row">
         <div className="col">
-          <button type="button" className="btn btn-info btn-lg mb-3 w-100">
-            Google Login
-          </button>
+          <GoogleLogin
+            class="w-100"
+            :callback="handleGoogleAuth"
+            prompt
+            auto-login
+          >
+            <button type="button" className="btn btn-info btn-lg mb-3 w-100">
+              Google Login
+            </button></GoogleLogin
+          >
         </div>
       </div>
     </div>
@@ -37,8 +44,14 @@
 
 <script setup>
 import { useRouter } from "vue-router";
+import { GoogleLogin, decodeCredential } from "vue3-google-login";
 
 const router = useRouter();
+
+const handleGoogleAuth = (response) => {
+  debugger;
+  const data = decodeCredential(response.code);
+};
 
 const navigateTo = (path) => {
   router.push(path);
