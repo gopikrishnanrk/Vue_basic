@@ -26,16 +26,9 @@
       </div>
       <div className="row">
         <div className="col">
-          <GoogleLogin
-            class="w-100"
-            :callback="handleGoogleAuth"
-            prompt
-            auto-login
-          >
-            <button type="button" className="btn btn-info btn-lg mb-3 w-100">
-              Google Login
-            </button></GoogleLogin
-          >
+          <span className="w-100">
+            <GoogleLogin :callback="handleGoogleAuth" prompt />
+          </span>
         </div>
       </div>
     </div>
@@ -45,12 +38,37 @@
 <script setup>
 import { useRouter } from "vue-router";
 import { GoogleLogin, decodeCredential } from "vue3-google-login";
+import { postUser } from "../../service/userService";
+import { setUserDetails } from "../../utils/localStorage";
 
 const router = useRouter();
 
 const handleGoogleAuth = (response) => {
-  debugger;
-  const data = decodeCredential(response.code);
+  const { email, picture } = decodeCredential(response.credential);
+
+  const params = {
+    email,
+    image: picture ?? "-",
+    password: "-",
+    confirmPassword: "-",
+    phoneNo: "-",
+    dob: "-",
+    country: "-",
+  };
+
+  const createUser = async (email) => {
+    try {
+      const { data } = await postUser(email);
+      setUserDetails(params);
+      router.push("/dashboard");
+      alert("Registered successfully");
+    } catch (error) {
+      alert(error);
+      console.error("Error:", error);
+    }
+  };
+
+  createUser(params);
 };
 
 const navigateTo = (path) => {

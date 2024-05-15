@@ -13,6 +13,14 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
+      <a class="navbar-brand" href="#">
+        <img
+          :src="userData?.image ? userData?.image : dummyUser"
+          width="30"
+          height="30"
+          alt=""
+        />
+      </a>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-item nav-link active"
@@ -53,6 +61,7 @@ import { onMounted, reactive, ref } from "vue";
 import { getAllUser } from "../../service/userService";
 import { getUserDetails, removeUserDetails } from "../../utils/localStorage";
 import { useRouter } from "vue-router";
+import dummyUser from "../../assets/dummy-usr-icon.svg";
 
 const router = useRouter();
 
