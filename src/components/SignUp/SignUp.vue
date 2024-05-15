@@ -64,7 +64,7 @@ const authenticateUser = async (email, password) => {
 
 const submitValidation = () => {
   Object.entries(fieldValues).map(([key, value]) => {
-    if (!value) {
+    if (!value && key !== "image") {
       return (fieldErr[key] = "Field value is required");
     }
   });
@@ -100,6 +100,7 @@ const handleChangeValidation = (key, value) => {
 
 const handleFocus = (event) => {
   const { value, name } = event.target;
+  if (name === "image") return;
   if (!value) fieldErr[name] = "Field value is required";
 };
 
@@ -115,8 +116,6 @@ const handleSubmit = () => {
     }
     loader.value = true;
     setTimeout(() => {
-      // const formData = new FormData();
-      // formData.append("image", fieldValues.image);
       postUserDetails(fieldValues);
       formSuccess.value = true;
       loader.value = false;
@@ -132,8 +131,19 @@ const handleCountrySelect = (data) => {
 const handleChange = (target, fieldName) => {
   const { value } = target;
   if (fieldName === "image") {
-    const img = target.files?.[0];
-    fieldValues[fieldName] = img;
+    const file = target.files?.[0];
+    if (file) {
+      console.log("file", file);
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        const base64Data = event.target.result;
+        console.log("base64Data", base64Data);
+        fieldValues[fieldName] = base64Data;
+        handleChangeValidation(fieldName, base64Data);
+      };
+      reader.readAsDataURL(file);
+    }
+    return;
   }
   fieldValues[fieldName] = value;
   handleChangeValidation(fieldName, value);
