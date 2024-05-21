@@ -34,26 +34,7 @@
       </div>
     </nav>
   </div>
-  <div class="table-container">
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Email</th>
-          <th>DOB</th>
-          <th>Phone No</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="each in state?.users" :key="each.email">
-          <td>{{ each.id }}</td>
-          <td>{{ each.email }}</td>
-          <td>{{ each.dob }}</td>
-          <td>{{ each.phoneNo }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <CommonTable :data="state.users" :column="headers" />
 </template>
 
 <script setup>
@@ -61,7 +42,20 @@ import { onMounted, reactive, ref } from "vue";
 import { getAllUser } from "../../service/userService";
 import { getUserDetails, removeUserDetails } from "../../utils/localStorage";
 import { useRouter } from "vue-router";
+import CommonTable from "../../common/CommonTable.vue";
 import dummyUser from "../../assets/dummy-usr-icon.svg";
+
+const headers = [
+  { title: "ID", key: "id" },
+  { title: "Email", key: "email" },
+  { title: "DOB", key: "dob" },
+  { title: "Country", key: "country" },
+  // {
+  //   title: "Full Name",
+  //   key: "fullName",
+  //   value: (item) => `${item.name.first} ${item.name.last}`,
+  // },
+];
 
 const router = useRouter();
 
@@ -93,34 +87,4 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.table-container {
-  width: 100%;
-  overflow-x: auto; /* Add horizontal scrollbar if table overflows */
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th,
-td {
-  padding: 8px;
-  border: 1px solid #ddd;
-}
-
-th {
-  background-color: #f2f2f2;
-}
-
-tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-tr:nth-child(odd) {
-  background-color: #cacaca;
-}
-
-tr:hover {
-  background-color: #ddd;
-}
 </style>

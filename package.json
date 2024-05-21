@@ -14,7 +14,8 @@
     "json-server": "^1.0.0-alpha.23",
     "vue": "^3.4.21",
     "vue-router": "^4.3.2",
-    "vue3-google-login": "^2.0.26"
+    "vue3-google-login": "^2.0.26",
+    "vuetify": "^3.6.0-beta.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
