@@ -4,6 +4,7 @@ import App from '../App.vue';
 import SignUp from '../components/SignUp/SignUp.vue';
 import Dashboard from '../components/Dashboard/Dashboard.vue';
 import LoginManagement from '../components/Login/LoginManagement.vue';
+import InvalidPage from '../common/InvalidPage.vue';
 import { getUserDetails } from '../utils/localStorage';
 // import { getUserDetails } from '../utils/localStorage';
 
@@ -22,6 +23,11 @@ const routes = [
   {
     path: '/dashboard',
     component: Dashboard,
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: InvalidPage,
   },
 ];
 
