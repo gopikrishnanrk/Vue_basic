@@ -2,7 +2,9 @@
   <div :class="className">
     <div class="table-header">
       <div class="d-flex justify-content-end p-4">
-        <button type="button" class="btn btn-outline-primary">Add</button>
+        <button @click="addClick" type="button" class="btn btn-outline-primary">
+          Add
+        </button>
       </div>
     </div>
     <v-data-table
@@ -19,6 +21,7 @@ defineProps({
   data: Array,
   column: Array,
   className: String,
+  addClick: Function,
 });
 </script>
 

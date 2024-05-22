@@ -1,5 +1,25 @@
 {
-  "posts": [],
+  "posts": [
+    {
+      "id": "7825",
+      "post": "How are you??",
+      "userId": "1cd2"
+    },
+    {
+      "id": "a3e9",
+      "post": "Heyyy"
+    },
+    {
+      "id": "2f6c",
+      "post": "asdsadasdadad",
+      "userId": "1e96"
+    },
+    {
+      "id": "1d6b",
+      "post": "hello\n",
+      "userId": "1e96"
+    }
+  ],
   "users": [
     {
       "id": "1cd2",
@@ -114,16 +134,6 @@
       "formData": {}
     },
     {
-      "id": "b49d",
-      "email": "gopikrishnan@spericorn.com",
-      "image": "https://lh3.googleusercontent.com/a/ACg8ocKZhv5EzwcB2KVnmOdc64QjrT6bA6eSnB3MsXHysSoI5hSaLQ=s96-c",
-      "password": "-",
-      "confirmPassword": "-",
-      "phoneNo": "-",
-      "dob": "-",
-      "country": "-"
-    },
-    {
       "id": "9151",
       "email": "admin@spericorn.com",
       "password": "235",
@@ -144,27 +154,7 @@
       "country": "IN"
     },
     {
-      "id": "07f8",
-      "email": "gopikrishnan@spericorn.com",
-      "image": "https://lh3.googleusercontent.com/a/ACg8ocKZhv5EzwcB2KVnmOdc64QjrT6bA6eSnB3MsXHysSoI5hSaLQ=s96-c",
-      "password": "-",
-      "confirmPassword": "-",
-      "phoneNo": "-",
-      "dob": "-",
-      "country": "-"
-    },
-    {
-      "id": "85ce",
-      "email": "gopikrishnanrk1999@gmail.com",
-      "image": "https://lh3.googleusercontent.com/a/ACg8ocKGI7QKafqDG76BrvHX5v9a6UCFysDLXMjPjI8xGnweSA-PbqXs=s96-c",
-      "password": "-",
-      "confirmPassword": "-",
-      "phoneNo": "-",
-      "dob": "-",
-      "country": "-"
-    },
-    {
-      "id": "2caa",
+      "id": "1e96",
       "email": "gopikrishnan@spericorn.com",
       "image": "https://lh3.googleusercontent.com/a/ACg8ocKZhv5EzwcB2KVnmOdc64QjrT6bA6eSnB3MsXHysSoI5hSaLQ=s96-c",
       "password": "-",

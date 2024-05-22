@@ -38,7 +38,7 @@
 <script setup>
 import { useRouter } from "vue-router";
 import { GoogleLogin, decodeCredential } from "vue3-google-login";
-import { postUser } from "../../service/userService";
+import { isgoogleIdValid, postUser } from "../../service/userService";
 import { setUserDetails } from "../../utils/localStorage";
 
 const router = useRouter();
@@ -56,10 +56,17 @@ const handleGoogleAuth = (response) => {
     country: "-",
   };
 
-  const createUser = async (email) => {
+  const createUser = async (params) => {
     try {
-      const { data } = await postUser(email);
-      setUserDetails(params);
+      const { data } = await isgoogleIdValid(params.email);
+      if (!!data.length) {
+        setUserDetails(data[0]);
+        router.push("/dashboard");
+        alert("Registered successfully");
+        return;
+      }
+      const createUser = await postUser(params);
+      setUserDetails(data[0]);
       router.push("/dashboard");
       alert("Registered successfully");
     } catch (error) {
