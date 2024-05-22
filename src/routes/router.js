@@ -4,22 +4,25 @@ import App from '../App.vue';
 import SignUp from '../components/SignUp/SignUp.vue';
 import Dashboard from '../components/Dashboard/Dashboard.vue';
 import LoginManagement from '../components/Login/LoginManagement.vue';
+import { getUserDetails } from '../utils/localStorage';
 // import { getUserDetails } from '../utils/localStorage';
 
 const routes = [
   {
     path: '/signup',
     component: SignUp,
+    public: true,
   },
   {
     path: '/login',
     component: SignUp,
+    public: true,
   },
+  { path: '/', component: LoginManagement, public: true },
   {
     path: '/dashboard',
     component: Dashboard,
   },
-  { path: '/', component: LoginManagement },
 ];
 
 // const isLoggedIn =
@@ -30,6 +33,20 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+router.beforeEach((to, from) => {
+  const isLoggedIn = getUserDetails();
+  const privateRoute = routes
+    ?.filter((each) => !each.public)
+    ?.map(({ path }) => path);
+  const publicRoute = routes
+    ?.filter((each) => each.public)
+    ?.map(({ path }) => path);
+
+  if (isLoggedIn) return !publicRoute?.includes(to.path);
+
+  if (!isLoggedIn) return !privateRoute?.includes(to.path);
 });
 
 export default router;
