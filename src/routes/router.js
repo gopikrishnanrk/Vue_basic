@@ -5,7 +5,9 @@ import SignUp from '../components/SignUp/SignUp.vue';
 import Dashboard from '../components/Dashboard/Dashboard.vue';
 import LoginManagement from '../components/Login/LoginManagement.vue';
 import InvalidPage from '../common/InvalidPage.vue';
+import TextList from '../components/TextManagement/TextList.vue';
 import { getUserDetails } from '../utils/localStorage';
+
 // import { getUserDetails } from '../utils/localStorage';
 
 const routes = [
@@ -23,6 +25,10 @@ const routes = [
   {
     path: '/dashboard',
     component: Dashboard,
+  },
+  {
+    path: '/text-management',
+    component: TextList,
   },
   {
     path: '/:pathMatch(.*)*',

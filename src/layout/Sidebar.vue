@@ -3,7 +3,7 @@
     <div class="sidebar">
       <h2 class="sidebar-heading">Sidebar</h2>
       <router-link to="/dashboard">Dashboard</router-link>
-      <router-link to="/page">Page</router-link>
+      <router-link to="/text-management">Page</router-link>
     </div>
   </div>
 </template>
@@ -13,11 +13,12 @@
 
 <style scoped>
 .sidebar-container {
-  display: flex;../assets/404-error.png
+  display: flex;
   height: 100vh;
   margin: 0;
   font-family: Arial, sans-serif;
 }
+
 .sidebar {
   width: 250px;
   background-color: #333;
