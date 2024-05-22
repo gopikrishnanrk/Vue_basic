@@ -24,7 +24,7 @@
   background-color: #333;
   color: #fff;
   overflow: auto;
-  padding-top: 20px;
+  padding: 20px 0px 0px 10px;
   flex-shrink: 0;
 }
 .sidebar a {
